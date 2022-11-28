@@ -30,6 +30,8 @@ function updateMap() {
       layers: dataset_config[dst]['vars'][variable],
       belowmincolor: 'transparent',
       abovemaxcolor: 'transparent',
+      numcolorbands: 250,
+      style: 'boxfill/ncview',
       time: dataset_config[dst]['daterange'][req_time],
       elevation: String(dataset_config[dst]['levels'][level]),
       transparent: true,
@@ -45,6 +47,8 @@ function updateMap() {
       layers: dataset_config[dst]['vars'][variable],
       belowmincolor: 'transparent',
       abovemaxcolor: 'transparent',
+      numcolorbands: 250,
+      style: 'boxfill/ncview',
       time: dataset_config[dst]['daterange'][req_time],
       elevation: String(dataset_config[dst]['levels'][level]),
       colorscalerange: [lowval, highval],
@@ -89,7 +93,7 @@ function initDemoMap() {
   };
   //MAP STRUCTURE
   var map = L.map('map', {
-    layers: [Esri_Ocean],
+    layers: [Esri_World],
     minZoom: 2,
     worldCopyJump: false,
     inertia: false
