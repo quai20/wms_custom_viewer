@@ -23,8 +23,7 @@ function updateMap() {
      
   if (isNaN(lowval) || isNaN(highval) || (lowval>highval)) {
     var legend_url = dataset_config[dst]['url']+"request=GetLegendGraphic&layer="+dataset_config[dst]['vars'][variable]+"&bgcolor=0xffffff";
-    wms_layer = L.tileLayer.wms(dataset_config[dst]['url'], {
-      //attribution: 'TAMU/UMD',    
+    wms_layer = L.tileLayer.wms(dataset_config[dst]['url'], {      
       crs: L.CRS.EPSG4326,
       format: 'image/png',
       layers: dataset_config[dst]['vars'][variable],
@@ -40,8 +39,7 @@ function updateMap() {
   }
   else {
     var legend_url = dataset_config[dst]['url']+"request=GetLegendGraphic&layer="+dataset_config[dst]['vars'][variable]+"&colorscalerange="+String(lowval)+","+String(highval)+"&bgcolor=0xffffff";
-    wms_layer = L.tileLayer.wms(dataset_config[dst]['url'], {
-      //attribution: 'TAMU/UMD',    
+    wms_layer = L.tileLayer.wms(dataset_config[dst]['url'], {      
       crs: L.CRS.EPSG4326,
       format: 'image/png',
       layers: dataset_config[dst]['vars'][variable],
