@@ -1,4 +1,4 @@
-var wms_layer = L.LayerGroup();
+var wms_layer = new L.LayerGroup();
 var islayed = false;
 
 function updateMap() {
@@ -11,7 +11,7 @@ function updateMap() {
     layerControl.removeLayer(wms_layer);
     map.removeLayer(wms_layer);
   }
-  
+
   // Get user selection
   var dst = parseInt(document.getElementById('dataset').value);
   var variable = parseInt(document.getElementById('variable').value);
@@ -20,10 +20,10 @@ function updateMap() {
 
   var lowval = parseFloat(document.getElementById('lowval').value);
   var highval = parseFloat(document.getElementById('highval').value);
-     
-  if (isNaN(lowval) || isNaN(highval) || (lowval>highval)) {
-    var legend_url = dataset_config[dst]['url']+"request=GetLegendGraphic&layer="+dataset_config[dst]['vars'][variable]+"&bgcolor=0xffffff";
-    wms_layer = L.tileLayer.wms(dataset_config[dst]['url'], {      
+
+  if (isNaN(lowval) || isNaN(highval) || (lowval > highval)) {
+    var legend_url = dataset_config[dst]['url'] + "request=GetLegendGraphic&layer=" + dataset_config[dst]['vars'][variable] + "&bgcolor=0xffffff";
+    wms_layer = L.tileLayer.wms(dataset_config[dst]['url'], {
       crs: L.CRS.EPSG4326,
       format: 'image/png',
       layers: dataset_config[dst]['vars'][variable],
@@ -38,8 +38,8 @@ function updateMap() {
     }).addTo(map);
   }
   else {
-    var legend_url = dataset_config[dst]['url']+"request=GetLegendGraphic&layer="+dataset_config[dst]['vars'][variable]+"&colorscalerange="+String(lowval)+","+String(highval)+"&bgcolor=0xffffff";
-    wms_layer = L.tileLayer.wms(dataset_config[dst]['url'], {      
+    var legend_url = dataset_config[dst]['url'] + "request=GetLegendGraphic&layer=" + dataset_config[dst]['vars'][variable] + "&colorscalerange=" + String(lowval) + "," + String(highval) + "&bgcolor=0xffffff";
+    wms_layer = L.tileLayer.wms(dataset_config[dst]['url'], {
       crs: L.CRS.EPSG4326,
       format: 'image/png',
       layers: dataset_config[dst]['vars'][variable],
@@ -74,6 +74,7 @@ function updateMap() {
 }
 
 function initDemoMap() {
+
   //BASE TILE LAYER 1
   var Esri_Ocean = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri'
@@ -86,21 +87,21 @@ function initDemoMap() {
   );
   //BASE TILE GROUP LAYER
   var baseLayers = {
+    //'Base': Base_Tile,
     "Ocean": Esri_Ocean,
     "Satelite ": Esri_World
   };
-  //MAP STRUCTURE
+
+
   var map = L.map('map', {
+    //crs: crs,    
     layers: [Esri_World],
-    minZoom: 2,
-    worldCopyJump: false,
-    inertia: false
   });
 
   var layerControl = L.control.layers(baseLayers);
   layerControl.addTo(map);
 
-  map.setView([25, -20], 3);
+  map.setView([-30, 0], 3);
   L.control.mousePosition().addTo(map);
   //INIT RETURN FUNCTION
   return {
